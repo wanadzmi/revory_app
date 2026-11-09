@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:revory/controllers/garage_controller.dart';
 import 'package:revory/controllers/home_controller.dart';
-
-import 'package:revory/widgets/list_widgets.dart';
-import 'package:revory/widgets/vehicle_card.dart';
+import 'package:revory/controllers/reminder_controller.dart';
+import 'package:revory/widgets/garage/vehicle_card.dart';
+import 'package:revory/widgets/garage/vehicle_selector_sheet.dart';
+import 'package:revory/widgets/maintenance/maintenance_empty_state.dart';
+import 'package:revory/widgets/maintenance/record_tile.dart';
+import 'package:revory/widgets/reminders/service_reminder_sheet.dart';
+import 'package:revory/widgets/section_header.dart';
 
 /// Displays the selected vehicle, service targets, and recent maintenance.
 class HomePage extends ConsumerWidget {
-  /// Creates the Home page with vehicle and reminder interactions.
-  const new({required this.choose, required this.manageReminder, super.key});
+  /// Creates the selected-vehicle overview page.
+  const new({super.key});
 
-  /// Opens the vehicle selector.
-  final VoidCallback choose;
-
-  /// Opens the selected vehicle's service reminder form.
-  final VoidCallback manageReminder;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(homeControllerProvider);
@@ -55,9 +55,16 @@ class HomePage extends ConsumerWidget {
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 120),
           sliver: SliverList(
             delegate: SliverChildListDelegate([
-              VehicleCard(vehicle: vehicle, onTap: choose),
+              VehicleCard(
+                vehicle: vehicle,
+                onTap: () => _chooseVehicle(context),
+              ),
               const SizedBox(height: 28),
-              Section('UPCOMING SERVICE', 'Manage', onTap: manageReminder),
+              SectionHeader(
+                'UPCOMING SERVICE',
+                'Manage',
+                onTap: () => _manageReminder(context, ref),
+              ),
               const SizedBox(height: 10),
               Card(
                 child: Padding(
@@ -95,10 +102,10 @@ class HomePage extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 27),
-              const Section('RECENT MAINTENANCE', 'See all'),
+              const SectionHeader('RECENT MAINTENANCE', 'See all'),
               const SizedBox(height: 8),
               if (records.isEmpty)
-                const Empty()
+                const MaintenanceEmptyState()
               else
                 ...records.take(3).map((r) => RecordTile(record: r)),
             ]),
@@ -106,5 +113,25 @@ class HomePage extends ConsumerWidget {
         ),
       ],
     );
+  }
+
+  Future<void> _chooseVehicle(BuildContext context) =>
+      showModalBottomSheet<void>(
+        context: context,
+        showDragHandle: true,
+        builder: (_) => const VehicleSelectorSheet(),
+      );
+
+  Future<void> _manageReminder(BuildContext context, WidgetRef ref) async {
+    final vehicle = ref.read(garageControllerProvider).vehicle;
+    final changed = await showModalBottomSheet<bool>(
+      context: context,
+      isScrollControlled: true,
+      showDragHandle: true,
+      builder: (_) => ServiceReminderSheet(vehicle: vehicle),
+    );
+    if (changed == true && context.mounted) {
+      await ref.read(reminderControllerProvider).saveReminder();
+    }
   }
 }

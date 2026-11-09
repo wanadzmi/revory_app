@@ -9,9 +9,9 @@ import 'package:revory/models/vehicle.dart';
 import 'package:revory/pages/profile_details_page.dart';
 import 'package:revory/pages/settings_page.dart';
 import 'package:revory/utils/formatters.dart';
-import 'package:revory/widgets/add_vehicle_sheet.dart';
-import 'package:revory/widgets/edit_vehicle_sheet.dart';
-import 'package:revory/widgets/list_widgets.dart';
+import 'package:revory/widgets/garage/add_vehicle_sheet.dart';
+import 'package:revory/widgets/garage/edit_vehicle_sheet.dart';
+import 'package:revory/widgets/section_header.dart';
 import 'package:revory/widgets/slide_actions.dart';
 
 /// Displays the user profile, garage management, and settings access.
@@ -87,7 +87,7 @@ class ProfilePage extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: 26),
-        const Section('MY GARAGE', 'Manage'),
+        const SectionHeader('MY GARAGE', 'Manage'),
         const SizedBox(height: 8),
         ...List.generate(
           vehicles.length,
