@@ -6,7 +6,7 @@ import 'package:revory/models/vehicle.dart';
 import 'package:revory/pages/car_camera_guide.dart';
 
 class EditVehicle extends StatefulWidget {
-  const EditVehicle({super.key, required this.vehicle});
+  const new({required this.vehicle, super.key});
   final Vehicle vehicle;
   @override
   State<EditVehicle> createState() => _EditVehicleState();

@@ -3,11 +3,11 @@ import 'package:revory/controllers/maintenance_form_controller.dart';
 import 'package:revory/models/vehicle.dart';
 
 class AddMaintenance extends StatefulWidget {
-  const AddMaintenance({
-    super.key,
+  const new({
     required this.mileage,
     required this.vehicles,
     required this.selectedVehicleId,
+    super.key,
   });
   final int mileage;
   final List<Vehicle> vehicles;

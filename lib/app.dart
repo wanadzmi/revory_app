@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:revory/controllers/garage_controller.dart';
@@ -8,7 +10,7 @@ import 'package:revory/pages/main_page.dart';
 import 'package:revory/theme/app_theme.dart';
 
 class RevoryApp extends ConsumerStatefulWidget {
-  const RevoryApp({super.key});
+  const new({super.key});
   @override
   ConsumerState<RevoryApp> createState() => _RevoryAppState();
 }
@@ -17,10 +19,10 @@ class _RevoryAppState extends ConsumerState<RevoryApp> {
   @override
   void initState() {
     super.initState();
-    ref.read(garageControllerProvider.notifier).restore();
-    ref.read(historyControllerProvider.notifier).restore();
-    ref.read(profileControllerProvider.notifier).restore();
-    ref.read(settingsControllerProvider.notifier).restore();
+    unawaited(ref.read(garageControllerProvider.notifier).restore());
+    unawaited(ref.read(historyControllerProvider.notifier).restore());
+    unawaited(ref.read(profileControllerProvider.notifier).restore());
+    unawaited(ref.read(settingsControllerProvider.notifier).restore());
   }
 
   @override

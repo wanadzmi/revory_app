@@ -5,7 +5,7 @@ import 'package:revory/controllers/vehicle_form_controller.dart';
 import 'package:revory/pages/car_camera_guide.dart';
 
 class AddVehicle extends StatefulWidget {
-  const AddVehicle({super.key});
+  const new({super.key});
   @override
   State<AddVehicle> createState() => _AddVehicleState();
 }

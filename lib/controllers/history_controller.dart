@@ -7,17 +7,18 @@ final historyControllerProvider =
     NotifierProvider<HistoryController, List<MaintenanceRecord>>(
       HistoryController.new,
     );
-final selectedVehicleRecordsProvider = Provider((ref) {
-  final garage = ref.watch(garageControllerProvider);
-  return ref
-      .watch(historyControllerProvider)
-      .where(
-        (r) =>
-            r.vehicleId == garage.vehicle.id ||
-            (r.vehicleId.isEmpty && garage.selected == 0),
-      )
-      .toList();
-});
+final Provider<List<MaintenanceRecord>> selectedVehicleRecordsProvider =
+    Provider((ref) {
+      final garage = ref.watch(garageControllerProvider);
+      return ref
+          .watch(historyControllerProvider)
+          .where(
+            (r) =>
+                r.vehicleId == garage.vehicle.id ||
+                (r.vehicleId.isEmpty && garage.selected == 0),
+          )
+          .toList();
+    });
 
 class HistoryController extends Notifier<List<MaintenanceRecord>> {
   @override

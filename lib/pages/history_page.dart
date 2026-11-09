@@ -5,7 +5,7 @@ import 'package:revory/widgets/list_widgets.dart';
 import 'package:revory/widgets/slide_actions.dart';
 
 class HistoryPage extends ConsumerWidget {
-  const HistoryPage({super.key, required this.onAdd});
+  const new({required this.onAdd, super.key});
   final VoidCallback onAdd;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -16,7 +16,7 @@ import 'package:revory/widgets/app_bottom_navigation_bar.dart';
 import 'package:revory/widgets/service_reminder_sheet.dart';
 
 class MainPage extends ConsumerStatefulWidget {
-  const MainPage({super.key});
+  const new({super.key});
   @override
   ConsumerState<MainPage> createState() => _MainPageState();
 }
@@ -35,7 +35,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       ),
     );
     if (result != null) {
-      ref.read(historyControllerProvider.notifier).addRecord(result);
+      await ref.read(historyControllerProvider.notifier).addRecord(result);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Maintenance saved to your history.')),
@@ -69,7 +69,7 @@ class _MainPageState extends ConsumerState<MainPage> {
     );
   }
 
-  void choose() => showModalBottomSheet(
+  Future<void> choose() => showModalBottomSheet<void>(
     context: context,
     showDragHandle: true,
     builder: (c) => Padding(
@@ -100,9 +100,11 @@ class _MainPageState extends ConsumerState<MainPage> {
               trailing: i == appState.selected
                   ? const Icon(Icons.check_circle)
                   : null,
-              onTap: () {
-                ref.read(garageControllerProvider.notifier).selectVehicle(i);
-                Navigator.pop(c);
+              onTap: () async {
+                await ref
+                    .read(garageControllerProvider.notifier)
+                    .selectVehicle(i);
+                if (c.mounted) Navigator.pop(c);
               },
             );
           }),
@@ -120,7 +122,7 @@ class _MainPageState extends ConsumerState<MainPage> {
       builder: (_) => ServiceReminderSheet(vehicle: vehicle),
     );
     if (changed == true) {
-      ref.read(reminderControllerProvider).saveReminder();
+      await ref.read(reminderControllerProvider).saveReminder();
     }
   }
 }

@@ -4,7 +4,7 @@ import 'package:revory/models/vehicle.dart';
 import 'package:revory/utils/formatters.dart';
 
 class ServiceReminderSheet extends StatefulWidget {
-  const ServiceReminderSheet({super.key, required this.vehicle});
+  const new({required this.vehicle, super.key});
   final Vehicle vehicle;
   @override
   State<ServiceReminderSheet> createState() => _ServiceReminderSheetState();

@@ -1,5 +1,5 @@
 class ProfileDetails {
-  const ProfileDetails(this.nickname, this.photoPath);
+  const new(this.nickname, this.photoPath);
   final String nickname;
   final String? photoPath;
 }

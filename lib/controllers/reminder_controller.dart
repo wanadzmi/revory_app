@@ -3,10 +3,12 @@ import 'package:revory/controllers/garage_controller.dart';
 import 'package:revory/controllers/settings_controller.dart';
 import 'package:revory/services/notification_service.dart';
 
-final reminderControllerProvider = Provider(ReminderController.new);
+final Provider<ReminderController> reminderControllerProvider = Provider(
+  ReminderController.new,
+);
 
 class ReminderController {
-  ReminderController(this.ref);
+  new(this.ref);
   final Ref ref;
   Future<void> saveReminder() async {
     await ref.read(garageControllerProvider.notifier).saveVehicle();

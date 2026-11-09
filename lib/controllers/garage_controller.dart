@@ -7,7 +7,7 @@ final garageControllerProvider =
     NotifierProvider<GarageController, GarageState>(GarageController.new);
 
 class GarageState {
-  const GarageState(this.vehicles, [this.selected = 0]);
+  const new(this.vehicles, [this.selected = 0]);
   final List<Vehicle> vehicles;
   final int selected;
   Vehicle get vehicle => vehicles[selected];

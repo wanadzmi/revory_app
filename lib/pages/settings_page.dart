@@ -4,7 +4,7 @@ import 'package:revory/constants/app_constants.dart';
 import 'package:revory/controllers/settings_controller.dart';
 
 class SettingsPage extends ConsumerWidget {
-  const SettingsPage({super.key});
+  const new({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsControllerProvider);
@@ -82,7 +82,9 @@ class SettingsPage extends ConsumerWidget {
       ),
     );
     if (selected != null) {
-      ref.read(settingsControllerProvider.notifier).setThemeMode(selected);
+      await ref
+          .read(settingsControllerProvider.notifier)
+          .setThemeMode(selected);
     }
   }
 }

@@ -1,9 +1,11 @@
+import 'dart:async';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:revory/controllers/car_camera_controller.dart';
 
 class CarCameraGuide extends StatefulWidget {
-  const CarCameraGuide({super.key});
+  const new({super.key});
   @override
   State<CarCameraGuide> createState() => _CarCameraGuideState();
 }
@@ -14,7 +16,7 @@ class _CarCameraGuideState extends State<CarCameraGuide> {
   void initState() {
     super.initState();
     controller.addListener(_refresh);
-    controller.start();
+    unawaited(controller.start());
   }
 
   void _refresh() {

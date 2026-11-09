@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final localAppRepositoryProvider = Provider((ref) => LocalAppRepository());
+final Provider<LocalAppRepository> localAppRepositoryProvider = Provider(
+  (ref) => LocalAppRepository(),
+);
 
 class LocalAppRepository {
   Future<SharedPreferences> get preferences => SharedPreferences.getInstance();

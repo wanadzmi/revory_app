@@ -5,7 +5,7 @@ import 'package:revory/controllers/profile_controller.dart';
 import 'package:revory/models/maintenance_record.dart';
 import 'package:revory/models/vehicle.dart';
 
-final homeControllerProvider = Provider(
+final Provider<HomeState> homeControllerProvider = Provider(
   (ref) => HomeState(
     ref.watch(garageControllerProvider).vehicle,
     ref.watch(selectedVehicleRecordsProvider),
@@ -14,7 +14,7 @@ final homeControllerProvider = Provider(
 );
 
 class HomeState {
-  const HomeState(this.vehicle, this.records, this.nickname);
+  const new(this.vehicle, this.records, this.nickname);
   final Vehicle vehicle;
   final List<MaintenanceRecord> records;
   final String nickname;

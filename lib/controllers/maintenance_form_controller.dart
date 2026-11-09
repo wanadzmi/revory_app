@@ -3,7 +3,7 @@ import 'package:revory/models/vehicle.dart';
 import 'package:revory/services/attachment_service.dart';
 
 class MaintenanceFormController {
-  MaintenanceFormController({AttachmentService? attachments})
+  new({AttachmentService? attachments})
     : attachments = attachments ?? AttachmentService();
   final AttachmentService attachments;
   bool canSave(String service) => service.trim().isNotEmpty;

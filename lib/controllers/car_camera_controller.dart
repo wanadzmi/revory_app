@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 
@@ -10,6 +12,11 @@ class CarCameraController extends ChangeNotifier {
     CameraController? next;
     try {
       final cameras = await availableCameras();
+      if (cameras.isEmpty) {
+        error = 'No camera is available on this device.';
+        notifyListeners();
+        return;
+      }
       final description = cameras.firstWhere(
         (c) => c.lensDirection == CameraLensDirection.back,
         orElse: () => cameras.first,
@@ -26,7 +33,7 @@ class CarCameraController extends ChangeNotifier {
       }
       camera = next;
       notifyListeners();
-    } catch (_) {
+    } on CameraException {
       await next?.dispose();
       if (_disposed) return;
       error = 'Camera is unavailable. Check camera permission.';
@@ -42,7 +49,7 @@ class CarCameraController extends ChangeNotifier {
     _capturing = true;
     try {
       return (await current.takePicture()).path;
-    } catch (_) {
+    } on CameraException {
       if (!_disposed) {
         error = 'Could not take the photo. Please try again.';
         notifyListeners();
@@ -56,7 +63,8 @@ class CarCameraController extends ChangeNotifier {
   @override
   void dispose() {
     _disposed = true;
-    camera?.dispose();
+    final current = camera;
+    if (current != null) unawaited(current.dispose());
     super.dispose();
   }
 }

@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:revory/controllers/profile_details_controller.dart';
 
 class ProfileDetailsPage extends StatefulWidget {
-  const ProfileDetailsPage({
-    super.key,
-    required this.nickname,
-    required this.photoPath,
-  });
+  const new({required this.nickname, required this.photoPath, super.key});
   final String nickname;
   final String? photoPath;
   @override

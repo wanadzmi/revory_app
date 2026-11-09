@@ -15,7 +15,7 @@ import 'package:revory/widgets/list_widgets.dart';
 import 'package:revory/widgets/slide_actions.dart';
 
 class ProfilePage extends ConsumerWidget {
-  const ProfilePage({super.key});
+  const new({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profile = ref.watch(profileControllerProvider);
@@ -44,7 +44,7 @@ class ProfilePage extends ConsumerWidget {
             IconButton(
               onPressed: () => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const SettingsPage()),
+                MaterialPageRoute<void>(builder: (_) => const SettingsPage()),
               ),
               icon: const Icon(Icons.settings_outlined),
               tooltip: 'Settings',
@@ -65,7 +65,7 @@ class ProfilePage extends ConsumerWidget {
                 ),
               );
               if (result != null) {
-                onUpdateProfile(result.nickname, result.photoPath);
+                await onUpdateProfile(result.nickname, result.photoPath);
               }
             },
             contentPadding: const EdgeInsets.all(14),
@@ -103,7 +103,7 @@ class ProfilePage extends ConsumerWidget {
                   showDragHandle: true,
                   builder: (_) => EditVehicle(vehicle: vehicles[i]),
                 );
-                if (saved == true) onEditVehicle();
+                if (saved == true) await onEditVehicle();
               },
               child: Card(
                 margin: EdgeInsets.zero,
@@ -136,7 +136,7 @@ class ProfilePage extends ConsumerWidget {
               showDragHandle: true,
               builder: (_) => const AddVehicle(),
             );
-            if (v != null) add(v);
+            if (v != null) await add(v);
           },
           icon: const Icon(Icons.add),
           label: const Text('Add another vehicle'),

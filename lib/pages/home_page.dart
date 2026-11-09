@@ -6,11 +6,7 @@ import 'package:revory/widgets/list_widgets.dart';
 import 'package:revory/widgets/vehicle_card.dart';
 
 class HomePage extends ConsumerWidget {
-  const HomePage({
-    super.key,
-    required this.choose,
-    required this.manageReminder,
-  });
+  const new({required this.choose, required this.manageReminder, super.key});
   final VoidCallback choose;
   final VoidCallback manageReminder;
   @override

@@ -5,7 +5,7 @@ import 'package:revory/models/vehicle.dart';
 import 'package:revory/utils/formatters.dart';
 
 class VehicleCard extends StatelessWidget {
-  const VehicleCard({super.key, required this.vehicle, required this.onTap});
+  const new({required this.vehicle, required this.onTap, super.key});
   final Vehicle vehicle;
   final VoidCallback onTap;
   @override
@@ -98,7 +98,7 @@ class VehicleCard extends StatelessWidget {
       ),
     ),
   );
-  Widget _fallback() => Container(
+  Widget _fallback() => ColoredBox(
     color: vehicle.color,
     child: const Center(
       child: Icon(

@@ -2,7 +2,7 @@ import 'package:revory/models/profile_details.dart';
 import 'package:revory/services/attachment_service.dart';
 
 class ProfileDetailsController {
-  ProfileDetailsController({AttachmentService? attachments})
+  new({AttachmentService? attachments})
     : attachments = attachments ?? AttachmentService();
   final AttachmentService attachments;
   Future<String?> pickPhoto() => attachments.pickPhoto();

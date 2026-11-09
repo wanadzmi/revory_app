@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class SlideActions extends StatelessWidget {
-  const SlideActions({
-    super.key,
+  const new({
     required this.itemKey,
     required this.onDeleted,
     required this.child,
     required this.itemLabel,
+    super.key,
     this.onEdit,
     this.canDelete = true,
   });
@@ -73,20 +73,16 @@ class SlideActions extends StatelessWidget {
 }
 
 class _SlideButton extends StatelessWidget {
-  const _SlideButton({
-    required this.icon,
-    required this.color,
-    required this.onPressed,
-  });
+  const new({required this.icon, required this.color, required this.onPressed});
   final IconData icon;
   final Color color;
   final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) => SizedBox.expand(
     child: FilledButton(
-      onPressed: () {
+      onPressed: () async {
         onPressed();
-        Slidable.of(context)?.close();
+        await Slidable.of(context)?.close();
       },
       style: FilledButton.styleFrom(
         backgroundColor: color,

@@ -3,9 +3,9 @@ import 'package:revory/models/maintenance_record.dart';
 import 'package:revory/utils/formatters.dart';
 
 class RecordTile extends StatelessWidget {
-  const RecordTile({
-    super.key,
+  const new({
     required this.record,
+    super.key,
     this.detailed = false,
     this.margin = const EdgeInsets.only(bottom: 10),
   });
@@ -28,7 +28,7 @@ class RecordTile extends StatelessWidget {
 }
 
 class Section extends StatelessWidget {
-  const Section(this.title, this.action, {super.key, this.onTap});
+  const new(this.title, this.action, {super.key, this.onTap});
   final String title;
   final String? action;
   final VoidCallback? onTap;
@@ -60,7 +60,7 @@ class Section extends StatelessWidget {
 }
 
 class Empty extends StatelessWidget {
-  const Empty({super.key});
+  const new({super.key});
   @override
   Widget build(BuildContext context) => Padding(
     padding: const EdgeInsets.symmetric(vertical: 45),

@@ -7,10 +7,7 @@ final settingsControllerProvider =
     NotifierProvider<SettingsController, SettingsState>(SettingsController.new);
 
 class SettingsState {
-  const SettingsState({
-    this.themeMode = ThemeMode.light,
-    this.remindersEnabled = true,
-  });
+  const new({this.themeMode = ThemeMode.light, this.remindersEnabled = true});
   final ThemeMode themeMode;
   final bool remindersEnabled;
 }

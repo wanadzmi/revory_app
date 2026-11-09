@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Vehicle {
-  Vehicle(
+  new(
     this.name,
     this.year,
     this.registration,
@@ -13,6 +13,21 @@ class Vehicle {
     this.nextServiceLabel = 'Next service',
     this.photoPath,
   }) : id = id ?? registration;
+
+  factory fromJson(Map<String, dynamic> json) => Vehicle(
+    json['name'] as String,
+    json['year'] as String,
+    json['registration'] as String,
+    json['mileage'] as int,
+    Color(json['color'] as int),
+    id: json['id'] as String?,
+    nextServiceMileage: json['nextServiceMileage'] as int?,
+    nextServiceDate: json['nextServiceDate'] == null
+        ? null
+        : DateTime.parse(json['nextServiceDate'] as String),
+    nextServiceLabel: json['nextServiceLabel'] as String? ?? 'Next service',
+    photoPath: json['photoPath'] as String?,
+  );
 
   String name;
   String year;
@@ -37,19 +52,4 @@ class Vehicle {
     'nextServiceLabel': nextServiceLabel,
     'photoPath': photoPath,
   };
-
-  factory Vehicle.fromJson(Map<String, dynamic> json) => Vehicle(
-    json['name'] as String,
-    json['year'] as String,
-    json['registration'] as String,
-    json['mileage'] as int,
-    Color(json['color'] as int),
-    id: json['id'] as String?,
-    nextServiceMileage: json['nextServiceMileage'] as int?,
-    nextServiceDate: json['nextServiceDate'] == null
-        ? null
-        : DateTime.parse(json['nextServiceDate'] as String),
-    nextServiceLabel: json['nextServiceLabel'] as String? ?? 'Next service',
-    photoPath: json['photoPath'] as String?,
-  );
 }

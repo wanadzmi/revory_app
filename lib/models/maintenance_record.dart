@@ -1,5 +1,5 @@
 class MaintenanceRecord {
-  MaintenanceRecord(
+  new(
     this.title,
     this.workshop,
     this.date,
@@ -8,6 +8,15 @@ class MaintenanceRecord {
     this.receiptName, [
     this.vehicleId = '',
   ]);
+  factory fromJson(Map<String, dynamic> json) => MaintenanceRecord(
+    json['title'] as String,
+    json['workshop'] as String,
+    DateTime.parse(json['date'] as String),
+    json['mileage'] as int,
+    (json['cost'] as num).toDouble(),
+    json['receiptName'] as String?,
+    json['vehicleId'] as String? ?? '',
+  );
   final String title;
   final String workshop;
   final DateTime date;
@@ -26,14 +35,4 @@ class MaintenanceRecord {
     'receiptName': receiptName,
     'vehicleId': vehicleId,
   };
-  factory MaintenanceRecord.fromJson(Map<String, dynamic> json) =>
-      MaintenanceRecord(
-        json['title'] as String,
-        json['workshop'] as String,
-        DateTime.parse(json['date'] as String),
-        json['mileage'] as int,
-        (json['cost'] as num).toDouble(),
-        json['receiptName'] as String?,
-        json['vehicleId'] as String? ?? '',
-      );
 }
