@@ -2,12 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:revory/models/vehicle.dart';
 import 'package:revory/services/attachment_service.dart';
 
+/// Validates vehicle forms and normalizes vehicle fields.
 class VehicleFormController {
+  /// Creates vehicle-form logic with an optional attachment override.
   new({AttachmentService? attachments})
     : attachments = attachments ?? AttachmentService();
+
+  /// Platform attachment dependency used to select vehicle photos.
   final AttachmentService attachments;
+
+  /// Whether the vehicle model contains non-whitespace characters.
   bool canSave(String name) => name.trim().isNotEmpty;
+
+  /// Selects a vehicle image path, or returns null when cancelled.
   Future<String?> pickPhoto() => attachments.pickPhoto();
+
+  /// Creates an unsaved vehicle, or returns null when its name is blank.
   Vehicle? create({
     required String name,
     required String year,
@@ -26,6 +36,7 @@ class VehicleFormController {
     );
   }
 
+  /// Applies edited fields, preserving existing values for blank input.
   void update(
     Vehicle vehicle, {
     required String name,

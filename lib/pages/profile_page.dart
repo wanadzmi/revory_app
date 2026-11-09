@@ -14,7 +14,9 @@ import 'package:revory/widgets/edit_vehicle_sheet.dart';
 import 'package:revory/widgets/list_widgets.dart';
 import 'package:revory/widgets/slide_actions.dart';
 
+/// Displays the user profile, garage management, and settings access.
 class ProfilePage extends ConsumerWidget {
+  /// Creates the profile and garage management page.
   const new({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -120,7 +122,8 @@ class ProfilePage extends ConsumerWidget {
                   ),
                   title: Text(vehicles[i].name),
                   subtitle: Text(
-                    '${vehicles[i].registration} · ${numText(vehicles[i].mileage)} km',
+                    '${vehicles[i].registration} · '
+                    '${numText(vehicles[i].mileage)} km',
                   ),
                   trailing: const Icon(Icons.chevron_left),
                 ),

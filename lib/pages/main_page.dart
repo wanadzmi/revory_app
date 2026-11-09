@@ -15,7 +15,9 @@ import 'package:revory/widgets/add_maintenance_sheet.dart';
 import 'package:revory/widgets/app_bottom_navigation_bar.dart';
 import 'package:revory/widgets/service_reminder_sheet.dart';
 
+/// Composes the primary tab pages and their navigation interactions.
 class MainPage extends ConsumerStatefulWidget {
+  /// Creates the primary navigation page.
   const new({super.key});
   @override
   ConsumerState<MainPage> createState() => _MainPageState();
@@ -64,7 +66,8 @@ class _MainPageState extends ConsumerState<MainPage> {
       ),
       bottomNavigationBar: AppBottomNavigationBar(
         selectedIndex: tab,
-        onSelected: ref.read(mainControllerProvider.notifier).selectTab,
+        onSelected: (index) =>
+            ref.read(mainControllerProvider.notifier).selectedTab = index,
       ),
     );
   }

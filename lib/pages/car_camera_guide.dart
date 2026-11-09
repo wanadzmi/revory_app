@@ -4,7 +4,9 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:revory/controllers/car_camera_controller.dart';
 
+/// Camera screen with a visual frame to help position a vehicle.
 class CarCameraGuide extends StatefulWidget {
+  /// Creates the guided vehicle camera screen.
   const new({super.key});
   @override
   State<CarCameraGuide> createState() => _CarCameraGuideState();

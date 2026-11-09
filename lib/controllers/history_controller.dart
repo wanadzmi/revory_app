@@ -3,10 +3,13 @@ import 'package:revory/controllers/garage_controller.dart';
 import 'package:revory/models/maintenance_record.dart';
 import 'package:revory/repositories/local_app_repository.dart';
 
+/// Provides maintenance history state and record operations.
 final historyControllerProvider =
     NotifierProvider<HistoryController, List<MaintenanceRecord>>(
       HistoryController.new,
     );
+
+/// Records belonging to the selected vehicle, including legacy unassigned data.
 final Provider<List<MaintenanceRecord>> selectedVehicleRecordsProvider =
     Provider((ref) {
       final garage = ref.watch(garageControllerProvider);
@@ -20,6 +23,7 @@ final Provider<List<MaintenanceRecord>> selectedVehicleRecordsProvider =
           .toList();
     });
 
+/// Manages maintenance records and their local persistence.
 class HistoryController extends Notifier<List<MaintenanceRecord>> {
   @override
   List<MaintenanceRecord> build() => [
@@ -48,12 +52,17 @@ class HistoryController extends Notifier<List<MaintenanceRecord>> {
       null,
     ),
   ];
+
+  /// Storage dependency used for maintenance history.
   LocalAppRepository get repository => ref.read(localAppRepositoryProvider);
+
+  /// Replaces history with saved records when stored data exists.
   Future<void> restore() async {
     final saved = await repository.readList('records');
     if (saved != null) state = saved.map(MaintenanceRecord.fromJson).toList();
   }
 
+  /// Saves a record and updates its vehicle's recorded mileage.
   Future<void> addRecord(MaintenanceRecord record) async {
     if (record.vehicleId.isEmpty) {
       record.vehicleId = ref.read(garageControllerProvider).vehicle.id;
@@ -68,6 +77,7 @@ class HistoryController extends Notifier<List<MaintenanceRecord>> {
         .updateMileage(record.vehicleId, record.mileage);
   }
 
+  /// Removes a record from history and persists the remaining records.
   Future<void> deleteRecord(MaintenanceRecord record) async {
     state = state.where((r) => r != record).toList();
     await repository.writeList(

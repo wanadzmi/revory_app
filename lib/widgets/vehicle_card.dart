@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:revory/models/vehicle.dart';
 import 'package:revory/utils/formatters.dart';
 
+/// Displays the selected vehicle photo, identity, and recorded mileage.
 class VehicleCard extends StatelessWidget {
+  /// Creates a vehicle summary card with a tap interaction.
   const new({required this.vehicle, required this.onTap, super.key});
+
+  /// Vehicle whose details and image are displayed.
   final Vehicle vehicle;
+
+  /// Invoked when the user taps the vehicle summary.
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) => InkWell(

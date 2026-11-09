@@ -2,14 +2,26 @@ import 'package:revory/models/maintenance_record.dart';
 import 'package:revory/models/vehicle.dart';
 import 'package:revory/services/attachment_service.dart';
 
+/// Validates maintenance input and creates unsaved maintenance records.
 class MaintenanceFormController {
+  /// Creates form logic with an optional attachment-service override.
   new({AttachmentService? attachments})
     : attachments = attachments ?? AttachmentService();
+
+  /// Platform attachment dependency used to select receipts.
   final AttachmentService attachments;
+
+  /// Whether the service name contains non-whitespace characters.
   bool canSave(String service) => service.trim().isNotEmpty;
+
+  /// Selects a receipt and returns its name, or null when cancelled.
   Future<String?> pickReceipt() => attachments.pickReceipt();
+
+  /// Finds the recorded mileage for an existing vehicle ID.
   int mileageFor(List<Vehicle> vehicles, String id) =>
       vehicles.firstWhere((vehicle) => vehicle.id == id).mileage;
+
+  /// Creates a record from input; returns null for an empty service name.
   MaintenanceRecord? create({
     required String service,
     required String workshop,

@@ -3,8 +3,12 @@ import 'package:revory/controllers/reminder_form_controller.dart';
 import 'package:revory/models/vehicle.dart';
 import 'package:revory/utils/formatters.dart';
 
+/// Bottom-sheet form for a vehicle's date and mileage service targets.
 class ServiceReminderSheet extends StatefulWidget {
+  /// Creates a reminder form for the supplied vehicle.
   const new({required this.vehicle, super.key});
+
+  /// Vehicle whose reminder fields are updated on a valid save.
   final Vehicle vehicle;
   @override
   State<ServiceReminderSheet> createState() => _ServiceReminderSheetState();

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:revory/controllers/vehicle_form_controller.dart';
 import 'package:revory/pages/car_camera_guide.dart';
 
+/// Bottom-sheet form for adding a vehicle and optional photo.
 class AddVehicle extends StatefulWidget {
+  /// Creates the add-vehicle form.
   const new({super.key});
   @override
   State<AddVehicle> createState() => _AddVehicleState();

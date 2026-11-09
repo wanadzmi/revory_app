@@ -2,8 +2,11 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
+/// Initializes and schedules local upcoming-service notifications.
 class NotificationService {
   static final _plugin = FlutterLocalNotificationsPlugin();
+
+  /// Initializes timezone data and platform notification permissions.
   static Future<void> initialize() async {
     tz.initializeTimeZones();
     await _plugin.initialize(
@@ -19,6 +22,7 @@ class NotificationService {
         ?.requestNotificationsPermission();
   }
 
+  /// Schedules a reminder one week before the due date when still upcoming.
   static Future<void> schedule({
     required int id,
     required String vehicle,
@@ -54,5 +58,6 @@ class NotificationService {
     );
   }
 
+  /// Cancels all notifications scheduled by the app.
   static Future<void> cancelAll() => _plugin.cancelAll();
 }

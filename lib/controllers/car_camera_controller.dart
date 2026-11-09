@@ -3,11 +3,17 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 
+/// Owns camera initialization, capture, and resource cleanup.
 class CarCameraController extends ChangeNotifier {
+  /// Initialized camera used to render the preview, or null while loading.
   CameraController? camera;
+
+  /// User-facing failure message, or null when no failure occurred.
   String? error;
   bool _disposed = false;
   bool _capturing = false;
+
+  /// Opens the rear camera, falling back to the first available camera.
   Future<void> start() async {
     CameraController? next;
     try {
@@ -41,6 +47,7 @@ class CarCameraController extends ChangeNotifier {
     }
   }
 
+  /// Captures a photo and returns its path; returns null on failure or overlap.
   Future<String?> capture() async {
     final current = camera;
     if (current == null || !current.value.isInitialized || _capturing) {

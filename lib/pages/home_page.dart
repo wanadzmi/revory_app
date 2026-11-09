@@ -5,9 +5,15 @@ import 'package:revory/controllers/home_controller.dart';
 import 'package:revory/widgets/list_widgets.dart';
 import 'package:revory/widgets/vehicle_card.dart';
 
+/// Displays the selected vehicle, service targets, and recent maintenance.
 class HomePage extends ConsumerWidget {
+  /// Creates the Home page with vehicle and reminder interactions.
   const new({required this.choose, required this.manageReminder, super.key});
+
+  /// Opens the vehicle selector.
   final VoidCallback choose;
+
+  /// Opens the selected vehicle's service reminder form.
   final VoidCallback manageReminder;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

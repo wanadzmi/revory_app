@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:revory/constants/app_constants.dart';
 import 'package:revory/controllers/settings_controller.dart';
 
+/// Displays appearance, service reminders, and local sync status.
 class SettingsPage extends ConsumerWidget {
+  /// Creates the application settings page.
   const new({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -42,7 +44,7 @@ class SettingsPage extends ConsumerWidget {
                     maxLines: 1,
                   ),
                   value: remindersEnabled,
-                  onChanged: onToggleReminders,
+                  onChanged: (enabled) => onToggleReminders(enabled: enabled),
                 ),
                 const Divider(height: 1),
                 const ListTile(

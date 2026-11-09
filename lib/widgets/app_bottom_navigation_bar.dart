@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 
 /// The app's three primary navigation destinations.
 class AppBottomNavigationBar extends AdaptiveBottomNavigationBar {
+  /// Creates native primary navigation for Home, History, and Profile.
   const new({required int selectedIndex, required ValueChanged<int> onSelected})
     : super(
         useNativeBottomBar: true,

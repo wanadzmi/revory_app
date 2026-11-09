@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+/// Wraps a list item in edit/delete actions with delete confirmation.
 class SlideActions extends StatelessWidget {
+  /// Creates swipe actions for a uniquely identified list item.
   const new({
     required this.itemKey,
     required this.onDeleted,
@@ -11,11 +13,23 @@ class SlideActions extends StatelessWidget {
     this.onEdit,
     this.canDelete = true,
   });
+
+  /// Stable key used by the slidable list item.
   final Key itemKey;
+
+  /// Invoked after the user confirms deletion.
   final VoidCallback onDeleted;
+
+  /// Listing content displayed in front of the swipe actions.
   final Widget child;
+
+  /// Human-readable item name used in the deletion confirmation.
   final String itemLabel;
+
+  /// Optional edit action displayed before the delete action.
   final VoidCallback? onEdit;
+
+  /// Whether the delete action is available for this item.
   final bool canDelete;
   @override
   Widget build(BuildContext context) => Slidable(

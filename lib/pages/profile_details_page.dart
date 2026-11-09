@@ -3,9 +3,15 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:revory/controllers/profile_details_controller.dart';
 
+/// Edits the profile name and photo and returns the unsaved result.
 class ProfileDetailsPage extends StatefulWidget {
+  /// Creates an editor initialized from the supplied profile fields.
   const new({required this.nickname, required this.photoPath, super.key});
+
+  /// Display name initially populated in the editor.
   final String nickname;
+
+  /// Initial local image path, or null when the profile has no photo.
   final String? photoPath;
   @override
   State<ProfileDetailsPage> createState() => _ProfileDetailsPageState();

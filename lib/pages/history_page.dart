@@ -4,8 +4,12 @@ import 'package:revory/controllers/history_controller.dart';
 import 'package:revory/widgets/list_widgets.dart';
 import 'package:revory/widgets/slide_actions.dart';
 
+/// Displays maintenance history for the selected garage vehicle.
 class HistoryPage extends ConsumerWidget {
+  /// Creates the history page with its add-maintenance interaction.
   const new({required this.onAdd, super.key});
+
+  /// Opens the maintenance-entry form.
   final VoidCallback onAdd;
   @override
   Widget build(BuildContext context, WidgetRef ref) {

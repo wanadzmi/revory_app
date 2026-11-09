@@ -5,8 +5,12 @@ import 'package:revory/controllers/vehicle_form_controller.dart';
 import 'package:revory/models/vehicle.dart';
 import 'package:revory/pages/car_camera_guide.dart';
 
+/// Bottom-sheet form for editing vehicle details and its photo.
 class EditVehicle extends StatefulWidget {
+  /// Creates an editor for the supplied vehicle.
   const new({required this.vehicle, super.key});
+
+  /// Vehicle whose fields are updated when the user saves.
   final Vehicle vehicle;
   @override
   State<EditVehicle> createState() => _EditVehicleState();

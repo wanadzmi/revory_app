@@ -9,7 +9,9 @@ import 'package:revory/controllers/settings_controller.dart';
 import 'package:revory/pages/main_page.dart';
 import 'package:revory/theme/app_theme.dart';
 
+/// Root application with provider-backed appearance and primary navigation.
 class RevoryApp extends ConsumerStatefulWidget {
+  /// Creates the root application.
   const new({super.key});
   @override
   ConsumerState<RevoryApp> createState() => _RevoryAppState();

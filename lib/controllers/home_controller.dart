@@ -5,6 +5,7 @@ import 'package:revory/controllers/profile_controller.dart';
 import 'package:revory/models/maintenance_record.dart';
 import 'package:revory/models/vehicle.dart';
 
+/// Combines selected vehicle, history, and profile state for the Home page.
 final Provider<HomeState> homeControllerProvider = Provider(
   (ref) => HomeState(
     ref.watch(garageControllerProvider).vehicle,
@@ -13,12 +14,21 @@ final Provider<HomeState> homeControllerProvider = Provider(
   ),
 );
 
+/// Derived data displayed on the Home page.
 class HomeState {
+  /// Creates the Home view state from its feature dependencies.
   const new(this.vehicle, this.records, this.nickname);
+
+  /// Vehicle whose summary and reminder are displayed.
   final Vehicle vehicle;
+
+  /// Maintenance history for the selected vehicle.
   final List<MaintenanceRecord> records;
+
+  /// Display name used in the garage heading.
   final String nickname;
 
+  /// Returns the greeting appropriate for the supplied local time.
   String greeting(DateTime now) {
     final hour = now.hour;
     return hour < 12
@@ -30,6 +40,7 @@ class HomeState {
         : 'Good night';
   }
 
+  /// Summary of configured service targets, or guidance when no target exists.
   String get reminderText {
     final parts = <String>[];
     if (vehicle.nextServiceMileage != null) {

@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:revory/controllers/maintenance_form_controller.dart';
 import 'package:revory/models/vehicle.dart';
 
+/// Bottom-sheet form for entering maintenance for a garage vehicle.
 class AddMaintenance extends StatefulWidget {
+  /// Creates a maintenance form with initial vehicle and mileage values.
   const new({
     required this.mileage,
     required this.vehicles,
     required this.selectedVehicleId,
     super.key,
   });
+
+  /// Initial odometer value used by the form.
   final int mileage;
+
+  /// Vehicles available in the form's vehicle selector.
   final List<Vehicle> vehicles;
+
+  /// ID of the vehicle initially selected in the form.
   final String selectedVehicleId;
   @override
   State<AddMaintenance> createState() => _AddMaintenanceState();
