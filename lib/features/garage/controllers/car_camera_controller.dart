@@ -2,9 +2,16 @@ import 'dart:async';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
+import 'package:revory/core/services/photo_processing_service.dart';
 
 /// Owns camera initialization, capture, and resource cleanup.
 class CarCameraController extends ChangeNotifier {
+  /// Creates camera capture with an optional photo-processing override.
+  new({PhotoProcessingService? photos})
+    : _photos = photos ?? PhotoProcessingService();
+
+  final PhotoProcessingService _photos;
+
   /// Initialized camera used to render the preview, or null while loading.
   CameraController? camera;
 
@@ -55,7 +62,14 @@ class CarCameraController extends ChangeNotifier {
     }
     _capturing = true;
     try {
-      return (await current.takePicture()).path;
+      final photo = await current.takePicture();
+      return await _photos.process(photo.path, purpose: PhotoPurpose.vehicle);
+    } on PhotoProcessingException {
+      if (!_disposed) {
+        error = 'Could not process this photo. Please try again.';
+        notifyListeners();
+      }
+      return null;
     } on CameraException {
       if (!_disposed) {
         error = 'Could not take the photo. Please try again.';

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:revory/core/services/photo_processing_service.dart';
 import 'package:revory/features/garage/controllers/vehicle_form_controller.dart';
 import 'package:revory/features/garage/models/vehicle.dart';
 import 'package:revory/features/garage/pages/car_camera_guide.dart';
@@ -148,7 +149,24 @@ class _EditVehicleState extends State<EditVehicle> {
     ),
   );
 
+  bool _pickingPhoto = false;
+
   Future<void> choosePhoto() async {
+    if (_pickingPhoto) return;
+    _pickingPhoto = true;
+    try {
+      await _choosePhoto();
+    } on PhotoProcessingException catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(error.toString())));
+      }
+    } finally {
+      _pickingPhoto = false;
+    }
+  }
+
+  Future<void> _choosePhoto() async {
     final source = await showModalBottomSheet<String>(
       context: context,
       showDragHandle: true,

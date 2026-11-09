@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:revory/core/services/photo_processing_service.dart';
 import 'package:revory/features/profile/controllers/profile_details_controller.dart';
 
 /// Edits the profile name and photo and returns the unsaved result.
@@ -73,7 +74,24 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
       ],
     ),
   );
+  bool _pickingPhoto = false;
+
   Future<void> pickPhoto() async {
+    if (_pickingPhoto) return;
+    _pickingPhoto = true;
+    try {
+      await _pickPhoto();
+    } on PhotoProcessingException catch (error) {
+      if (mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(error.toString())));
+      }
+    } finally {
+      _pickingPhoto = false;
+    }
+  }
+
+  Future<void> _pickPhoto() async {
     final photo = await controller.pickPhoto();
     if (photo != null && mounted) setState(() => photoPath = photo);
   }
