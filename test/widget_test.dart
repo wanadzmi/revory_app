@@ -8,6 +8,6 @@ void main() {
 
     expect(find.text("Driver's garage"), findsOneWidget);
     expect(find.text('Mazda CX-5'), findsOneWidget);
-    expect(find.text('Maintenance'), findsNothing);
+    expect(find.text('History'), findsOneWidget);
   });
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:revory/controllers/garage_controller.dart';
-import 'package:revory/controllers/history_controller.dart';
-import 'package:revory/controllers/home_controller.dart';
-import 'package:revory/controllers/profile_controller.dart';
-import 'package:revory/controllers/settings_controller.dart';
-import 'package:revory/models/maintenance_record.dart';
+import 'package:revory/features/garage/controllers/garage_controller.dart';
+import 'package:revory/features/home/controllers/home_controller.dart';
+import 'package:revory/features/maintenance/controllers/history_controller.dart';
+import 'package:revory/features/maintenance/models/maintenance_record.dart';
+import 'package:revory/features/profile/controllers/profile_controller.dart';
+import 'package:revory/features/settings/controllers/settings_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {

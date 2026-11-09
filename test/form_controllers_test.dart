@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:revory/controllers/maintenance_form_controller.dart';
-import 'package:revory/controllers/profile_details_controller.dart';
-import 'package:revory/controllers/reminder_form_controller.dart';
-import 'package:revory/controllers/vehicle_form_controller.dart';
+import 'package:revory/features/garage/controllers/vehicle_form_controller.dart';
+import 'package:revory/features/maintenance/controllers/maintenance_form_controller.dart';
+import 'package:revory/features/profile/controllers/profile_details_controller.dart';
+import 'package:revory/features/reminders/controllers/reminder_form_controller.dart';
 
 void main() {
   test(

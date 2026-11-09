@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:revory/controllers/garage_controller.dart';
-import 'package:revory/controllers/history_controller.dart';
-import 'package:revory/pages/history_page.dart';
-import 'package:revory/pages/home_page.dart';
+import 'package:revory/features/garage/controllers/garage_controller.dart';
+import 'package:revory/features/home/pages/home_page.dart';
+import 'package:revory/features/maintenance/controllers/history_controller.dart';
+import 'package:revory/features/maintenance/pages/history_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -43,6 +43,7 @@ void main() {
       tester.element(find.byType(HistoryPage)),
     );
     final vehicleId = container.read(garageControllerProvider).vehicle.id;
+    expect(find.text('3 records saved for VBT 4821'), findsOneWidget);
     await tester.tap(find.byTooltip('Add maintenance'));
     await tester.pumpAndSettle();
     await tester.enterText(
@@ -57,5 +58,9 @@ void main() {
     expect(saved.vehicleId, vehicleId);
     expect(find.text('Air filter'), findsOneWidget);
     expect(find.text('Maintenance saved to your history.'), findsOneWidget);
+    expect(find.text('4 records saved for VBT 4821'), findsOneWidget);
+    await container.read(garageControllerProvider.notifier).selectVehicle(1);
+    await tester.pump();
+    expect(find.text('0 records saved for WXY 1937'), findsOneWidget);
   });
 }

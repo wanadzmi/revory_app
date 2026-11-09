@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:revory/controllers/garage_controller.dart';
-import 'package:revory/controllers/history_controller.dart';
-import 'package:revory/controllers/profile_controller.dart';
-import 'package:revory/controllers/settings_controller.dart';
-import 'package:revory/pages/main_page.dart';
-import 'package:revory/theme/app_theme.dart';
+import 'package:revory/features/garage/controllers/garage_controller.dart';
+import 'package:revory/features/maintenance/controllers/history_controller.dart';
+import 'package:revory/features/navigation/pages/main_page.dart';
+import 'package:revory/features/profile/controllers/profile_controller.dart';
+import 'package:revory/features/settings/controllers/settings_controller.dart';
+import 'package:revory/shared/theme/app_theme.dart';
 
 /// Root application with provider-backed appearance and primary navigation.
 class RevoryApp extends ConsumerStatefulWidget {
